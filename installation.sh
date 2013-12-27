@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Copyright 2012 
+# Copyright 2013 
 # Développé par : Stéphane HACQUARD
-# Date : 24-08-2013
+# Date : 27-12-2013
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -876,7 +876,7 @@ if [ ! -d /var/lib/postgresql ] ; then
 
 	if ! grep "0.0.0.0" /etc/postgresql/$version_postgresql/main/pg_hba.conf > /dev/null ; then
 
-		if grep "Debian GNU/Linux wheezy/sid" /etc/issue.net > /dev/null ; then
+		if grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
 		ligne=$(sed -n '/# IPv6 local connections:/=' /etc/postgresql/$version_postgresql/main/pg_hba.conf) 
 		sed -i "$ligne"i"\host    all             all             0.0.0.0/0               md5" /etc/postgresql/$version_postgresql/main/pg_hba.conf
 		else
