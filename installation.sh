@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 01-01-2014
+# Date : 06-01-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -414,7 +414,7 @@ case $valret in
 	if [ "$choix" = "6" ]
 	then
 		rm -f $fichtemp
-		installation_php5
+		choix_version_php5
 	fi
 
 	# Installation Suite 
@@ -905,6 +905,101 @@ fi
 $DIALOG  --backtitle "Installation Serveur Linux" \
 	  --title "Installation PostgreSQL" \
 	  --gauge "Installation PostgreSQL" 10 60 0 \
+
+menu_installation_serveur
+}
+
+#############################################################################
+# Fonction Choix Version PHP Debian 7
+#############################################################################
+
+choix_version_php5()
+{
+
+fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
+
+if grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
+
+(
+ echo "10" ; sleep 1
+) |
+$DIALOG  --ok-label "Validation" \
+	  --nocancel \
+	  --backtitle "Installation Serveur Linux" \
+	  --title "Installation PHP5" \
+	  --default-item "1" \
+	  --menu "Quel est votre choix" 10 48 2 \
+	  "1" "Installation PHP Version 5.3" \
+	  "2" "Installation PHP Version 5.4" 2> $fichtemp
+
+valret=$?
+choix=`cat $fichtemp`
+case $valret in
+
+ 0)	# Installation PHP Version 5.3
+	if [ "$choix" = "1" ]
+	then
+
+	if ! grep "squeeze main non-free" /etc/apt/sources.list > /dev/null ; then
+		echo "" >> /etc/apt/sources.list
+		echo "deb http://ftp.fr.debian.org/debian/ squeeze main non-free" >> /etc/apt/sources.list
+		echo "deb-src http://ftp.fr.debian.org/debian/ squeeze main non-free" >> /etc/apt/sources.list
+		echo "" >> /etc/apt/sources.list
+		echo "deb http://security.debian.org/ squeeze/updates main non-free" >> /etc/apt/sources.list
+		echo "deb-src http://security.debian.org/ squeeze/updates main non-free" >> /etc/apt/sources.list
+	fi
+
+	if [ ! -f /etc/apt/preferences.d/preferences ] ; then
+
+	cat <<- EOF > /etc/apt/preferences.d/preferences
+	Package: php5*
+	Pin: release a=oldstable
+	Pin-Priority: 700
+
+	Package: libapache2-mod-php5
+	Pin: release a=oldstable
+	Pin-Priority: 700
+
+	Package: php-pear
+	Pin: release a=oldstable
+	Pin-Priority: 700
+
+	Package: *
+	Pin: release a=stable
+	Pin-Priority: 600	
+	EOF
+
+	fi
+
+	apt-get update &> /dev/null
+	rm -f $fichtemp
+	installation_php5
+	fi
+
+
+	# Installation PHP Version 5.4
+	if [ "$choix" = "2" ]
+	then
+	rm -f $fichtemp
+	installation_php5
+	fi
+	
+	;;
+
+
+ 1)	# Appuyé sur Touche CTRL C
+	echo "Appuyé sur Touche CTRL C."
+	rm -f $fichtemp
+	;;
+
+ 255)	# Appuyé sur Touche Echap
+	echo "Appuyé sur Touche Echap."
+	rm -f $fichtemp
+	;;
+
+esac
+
+fi
 
 menu_installation_serveur
 }
