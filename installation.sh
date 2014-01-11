@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 06-01-2014
+# Date : 11-01-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -413,8 +413,13 @@ case $valret in
 	# Installation PHP5
 	if [ "$choix" = "6" ]
 	then
-		rm -f $fichtemp
-		choix_version_php5
+		if grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
+			rm -f $fichtemp
+			choix_version_php5
+		else
+			rm -f $fichtemp
+			installation_php5
+		fi
 	fi
 
 	# Installation Suite 
@@ -918,8 +923,6 @@ choix_version_php5()
 
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
-if grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
-
 (
  echo "10" ; sleep 1
 ) |
@@ -998,8 +1001,6 @@ case $valret in
 	;;
 
 esac
-
-fi
 
 menu_installation_serveur
 }
