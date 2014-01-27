@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 11-01-2014
+# Date : 27-01-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -19,6 +19,20 @@ password_root_mysql=password
 
 password_postgres_postgres=password
 password_root_postgres=password
+
+
+#############################################################################
+# Fonction Verification Version Debian  
+#############################################################################
+
+
+if grep "Debian GNU/Linux 6.0" /etc/issue.net > /dev/null ||
+   grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
+	echo "Version Debian OK!"
+else
+	echo "Version Debian Obsolete!"
+	exit
+fi
 
 
 #############################################################################
@@ -896,11 +910,8 @@ if [ ! -d /var/lib/postgresql ] ; then
  echo "90" ; sleep 1
  echo "XXX" ; echo "Redemarrage PostgreSQL en cours"; echo "XXX"
 
-	if grep "Debian GNU/Linux 5.0" /etc/issue.net > /dev/null ; then
-		/etc/init.d/postgresql-8.3 restart &> /dev/null
-	else
-		/etc/init.d/postgresql restart &> /dev/null
-	fi
+	/etc/init.d/postgresql restart &> /dev/null
+	
 fi
 
  echo "100" ; sleep 1
@@ -1677,15 +1688,6 @@ if [ -f /etc/apt/apt.conf ] ; then
 
 	rm -f $fichtemp
 	fi
-fi
-
-if grep "Debian GNU/Linux 5.0" /etc/issue.net > /dev/null && 
-   ! grep "my \$answer = \"yes\";" /usr/share/perl/$version_perl/CPAN.pm > /dev/null; then 
- echo "70" ; sleep 1
- echo "XXX" ; echo "Modification du fichier CPAN.pm pour debian 5"; echo "XXX" ; sleep 2
-	ligne=$(sed -n '/Is it OK to try to connect to the Internet/=' /usr/share/perl/$version_perl/CPAN.pm)
-	sed -i "$ligne"s"/my $answer/#my $answer/g" /usr/share/perl/$version_perl/CPAN.pm
-	sed -i "$ligne"a"\\\t\t  my \$answer = \"yes\";" /usr/share/perl/$version_perl/CPAN.pm
 fi
 
 if [ ! -f /usr/local/share/perl/$version_perl/YAML.pm ] ; then
