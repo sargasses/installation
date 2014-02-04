@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 27-01-2014
+# Date : 04-02-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -311,14 +311,14 @@ menu()
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
 
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Serveur Linux" \
-	  --clear \
-	  --colors \
-	  --default-item "2" \
-	  --menu "Quel est votre choix" 12 46 5 \
-	  "1" "Installation Serveur Linux" \
-	  "2" "Quitter" 2> $fichtemp
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Serveur Linux" \
+	 --clear \
+	 --colors \
+	 --default-item "2" \
+	 --menu "Quel est votre choix" 12 46 5 \
+	 "1" "Installation Serveur Linux" \
+	 "2" "Quitter" 2> $fichtemp
 
 
 valret=$?
@@ -369,20 +369,20 @@ verification_installation
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
 
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Serveur Linux" \
-	  --clear \
-	  --colors \
-	  --default-item "8" \
-	  --menu "Quel est votre choix" 16 50 8 \
-	  "1" "$choix1" \
-	  "2" "$choix2" \
-	  "3" "$choix3" \
-	  "4" "$choix4" \
-	  "5" "$choix5" \
-	  "6" "$choix6" \
-	  "7" "\Z4Installation Suite\Zn" \
-	  "8" "\Z4Retour\Zn" 2> $fichtemp
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Serveur Linux" \
+	 --clear \
+	 --colors \
+	 --default-item "8" \
+	 --menu "Quel est votre choix" 16 50 8 \
+	 "1" "$choix1" \
+	 "2" "$choix2" \
+	 "3" "$choix3" \
+	 "4" "$choix4" \
+	 "5" "$choix5" \
+	 "6" "$choix6" \
+	 "7" "\Z4Installation Suite\Zn" \
+	 "8" "\Z4Retour\Zn" 2> $fichtemp
 
 
 valret=$?
@@ -479,20 +479,20 @@ verification_installation
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
 
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Serveur Linux" \
-	  --clear \
-	  --colors \
-	  --default-item "8" \
-	  --menu "Quel est votre choix" 16 52 8 \
-	  "1" "$choix7" \
-	  "2" "$choix8" \
-	  "3" "$choix9" \
-	  "4" "$choix10" \
-	  "5" "$choix11" \
-	  "6" "$choix12" \
-	  "7" "\Z4Installation Suite\Zn" \
-	  "8" "\Z4Retour\Zn" 2> $fichtemp
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Serveur Linux" \
+	 --clear \
+	 --colors \
+	 --default-item "8" \
+	 --menu "Quel est votre choix" 16 52 8 \
+	 "1" "$choix7" \
+	 "2" "$choix8" \
+	 "3" "$choix9" \
+	 "4" "$choix10" \
+	 "5" "$choix11" \
+	 "6" "$choix12" \
+	 "7" "\Z4Installation Suite\Zn" \
+	 "8" "\Z4Retour\Zn" 2> $fichtemp
 
 
 
@@ -585,18 +585,18 @@ verification_installation
 fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
 
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Serveur Linux" \
-	  --clear \
-	  --colors \
-	  --default-item "6" \
-	  --menu "Quel est votre choix" 14 52 6 \
-	  "1" "$choix13" \
-	  "2" "$choix14" \
-	  "3" "$choix15" \
-	  "4" "$choix16" \
-	  "5" "$choix17" \
-	  "6" "\Z4Retour\Zn" 2> $fichtemp
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Serveur Linux" \
+	 --clear \
+	 --colors \
+	 --default-item "6" \
+	 --menu "Quel est votre choix" 14 52 6 \
+	 "1" "$choix13" \
+	 "2" "$choix14" \
+	 "3" "$choix15" \
+	 "4" "$choix16" \
+	 "5" "$choix17" \
+	 "6" "\Z4Retour\Zn" 2> $fichtemp
 
 
 valret=$?
@@ -691,9 +691,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation SSH" \
-	  --gauge "Installation SSH" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation SSH" \
+	 --gauge "Installation SSH" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -723,9 +723,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Compilateur" \
-	  --gauge "Installation Compilateur" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Compilateur" \
+	 --gauge "Installation Compilateur" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -757,9 +757,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Apache" \
-	  --gauge "Installation Apache" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Apache" \
+	 --gauge "Installation Apache" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -847,9 +847,9 @@ rm -f /tmp/resultat-final.txt
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation MySQL" \
-	  --gauge "Installation MySQL" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation MySQL" \
+	 --gauge "Installation MySQL" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -918,9 +918,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PostgreSQL" \
-	  --gauge "Installation PostgreSQL" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation PostgreSQL" \
+	 --gauge "Installation PostgreSQL" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -937,14 +937,14 @@ fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 (
  echo "10" ; sleep 1
 ) |
-$DIALOG  --ok-label "Validation" \
-	  --nocancel \
-	  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PHP5" \
-	  --default-item "1" \
-	  --menu "Quel est votre choix" 10 48 2 \
-	  "1" "Installation PHP Version 5.3" \
-	  "2" "Installation PHP Version 5.4" 2> $fichtemp
+$DIALOG --ok-label "Validation" \
+	 --nocancel \
+	 --backtitle "Installation Serveur Linux" \
+	 --title "Installation PHP5" \
+	 --default-item "1" \
+	 --menu "Quel est votre choix" 10 48 2 \
+	 "1" "Installation PHP Version 5.3" \
+	 "2" "Installation PHP Version 5.4" 2> $fichtemp
 
 valret=$?
 choix=`cat $fichtemp`
@@ -1050,9 +1050,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PHP5" \
-	  --gauge "Installation PHP5" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation PHP5" \
+	 --gauge "Installation PHP5" 10 60 0 \
 
 menu_installation_serveur
 }
@@ -1110,9 +1110,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PHPMyAdmin" \
-	  --gauge "Installation PHPMyAdmin" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation PHPMyAdmin" \
+	 --gauge "Installation PHPMyAdmin" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1162,9 +1162,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation phpPgAdmin" \
-	  --gauge "Installation phpPgAdmin" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation phpPgAdmin" \
+	 --gauge "Installation phpPgAdmin" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1234,9 +1234,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation SNMP" \
-	  --gauge "Installation SNMP" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation SNMP" \
+	 --gauge "Installation SNMP" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1263,9 +1263,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Fail2ban" \
-	  --gauge "Installation Fail2ban" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Fail2ban" \
+	 --gauge "Installation Fail2ban" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1292,9 +1292,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Client FTP" \
-	  --gauge "Installation Client FTP" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Client FTP" \
+	 --gauge "Installation Client FTP" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1321,9 +1321,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Client TELNET" \
-	  --gauge "Installation Client TELNET" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Client TELNET" \
+	 --gauge "Installation Client TELNET" 10 60 0 \
 
 menu_installation_serveur_suite1
 }
@@ -1374,9 +1374,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation SmbClient" \
-	  --gauge "Installation SmbClient" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation SmbClient" \
+	 --gauge "Installation SmbClient" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
@@ -1422,9 +1422,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation TFTP Serveur" \
-	  --gauge "Installation TFTP Serveur" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation TFTP Serveur" \
+	 --gauge "Installation TFTP Serveur" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
@@ -1479,9 +1479,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation Rsync Serveur" \
-	  --gauge "Installation Rsync Serveur" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation Rsync Serveur" \
+	 --gauge "Installation Rsync Serveur" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
@@ -1539,9 +1539,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PEAR" \
-	  --gauge "Installation PEAR" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation PEAR" \
+	 --gauge "Installation PEAR" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
@@ -1700,9 +1700,9 @@ fi
  echo "XXX" ; echo "Terminer"; echo "XXX"
  sleep 2
 ) |
-$DIALOG  --backtitle "Installation Serveur Linux" \
-	  --title "Installation PERL" \
-	  --gauge "Installation PERL" 10 60 0 \
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation PERL" \
+	 --gauge "Installation PERL" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
@@ -1711,6 +1711,4 @@ menu_installation_serveur_suite2
 # Demarrage du programme
 #############################################################################
 
-
 menu
-
