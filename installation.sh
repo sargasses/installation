@@ -2,8 +2,8 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 07-02-2014
-# Version 1.0
+# Date : 10-02-2014
+# Version 2.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
 
@@ -283,19 +283,25 @@ else
 	choix15="\Z2Installation Rsync Serveur\Zn" 
 fi
 
-if [ ! -d /usr/share/php/HTTP ] ; then
-	choix16="\Z1Installation PEAR\Zn" 
+if [ ! -f /usr/bin/nmap ] ; then
+	choix16="\Z1Installation NMAP\Zn" 
 else
-	choix16="\Z2Installation PEAR\Zn" 
+	choix16="\Z2Installation NMAP\Zn" 
+fi
+
+if [ ! -d /usr/share/php/HTTP ] ; then
+	choix17="\Z1Installation PEAR\Zn" 
+else
+	choix17="\Z2Installation PEAR\Zn" 
 fi
 
 if [ ! -d /usr/lib/perl/$version_perl/sys ] ||
    [ ! -f /etc/perl/CPAN/Config.pm ] ||
    [ ! -f /usr/local/share/perl/$version_perl/YAML.pm ] ||
    ! grep "'build_requires_install_policy' => q\[yes\]," /etc/perl/CPAN/Config.pm > /dev/null ; then
-	choix17="\Z1Installation PERL\Zn" 
+	choix18="\Z1Installation PERL\Zn" 
 else
-	choix17="\Z2Installation PERL\Zn" 
+	choix18="\Z2Installation PERL\Zn" 
 fi
 
 }
@@ -589,14 +595,15 @@ $DIALOG --backtitle "Installation Serveur Linux" \
 	 --title "Installation Serveur Linux" \
 	 --clear \
 	 --colors \
-	 --default-item "6" \
-	 --menu "Quel est votre choix" 14 52 6 \
+	 --default-item "7" \
+	 --menu "Quel est votre choix" 15 52 7 \
 	 "1" "$choix13" \
 	 "2" "$choix14" \
 	 "3" "$choix15" \
 	 "4" "$choix16" \
 	 "5" "$choix17" \
-	 "6" "\Z4Retour\Zn" 2> $fichtemp
+	 "6" "$choix18" \
+	 "7" "\Z4Retour\Zn" 2> $fichtemp
 
 
 valret=$?
@@ -624,22 +631,29 @@ case $valret in
 		installation_rsync
 	fi
 
-	# Installation PEAR
+	# Installation NMAP
 	if [ "$choix" = "4" ]
+	then
+		rm -f $fichtemp
+		installation_nmap
+	fi
+
+	# Installation PEAR
+	if [ "$choix" = "5" ]
 	then
 		rm -f $fichtemp
 		installation_pear
 	fi
 
 	# Installation PERL
-	if [ "$choix" = "5" ]
+	if [ "$choix" = "6" ]
 	then
 		rm -f $fichtemp
 		installation_perl
 	fi
 
 	# Retour
-	if [ "$choix" = "6" ]
+	if [ "$choix" = "7" ]
 	then
 		clear
 	fi
@@ -1482,6 +1496,35 @@ fi
 $DIALOG --backtitle "Installation Serveur Linux" \
 	 --title "Installation Rsync Serveur" \
 	 --gauge "Installation Rsync Serveur" 10 60 0 \
+
+menu_installation_serveur_suite2
+}
+
+#############################################################################
+# Fonction Installation NMAP
+#############################################################################
+
+installation_nmap()
+{
+
+(
+
+if [ ! -f /usr/bin/nmap ] ; then
+ echo "20" ; sleep 1
+ echo "XXX" ; echo "apt-get -y install nmap"; echo "XXX"
+	apt-get -y install nmap &> /dev/null
+fi
+
+ echo "60" ; sleep 1
+ echo "XXX" ; echo "apt-get -y install nmap"; echo "XXX"
+
+ echo "100" ; sleep 1
+ echo "XXX" ; echo "Terminer"; echo "XXX"
+ sleep 2
+) |
+$DIALOG --backtitle "Installation Serveur Linux" \
+	 --title "Installation NMAP" \
+	 --gauge "Installation NMAP" 10 60 0 \
 
 menu_installation_serveur_suite2
 }
