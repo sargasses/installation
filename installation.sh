@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 10-03-2014
+# Date : 28-03-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -343,9 +343,7 @@ case $valret in
 	then
 		clear
 	fi
-	
 	;;
-
 
  1)	# Appuyé sur Touche CTRL C
 	echo "Appuyé sur Touche CTRL C."
@@ -453,9 +451,7 @@ case $valret in
 	then
 		clear
 	fi
-	
 	;;
-
 
  1)	# Appuyé sur Touche CTRL C
 	echo "Appuyé sur Touche CTRL C."
@@ -558,10 +554,8 @@ case $valret in
 	if [ "$choix" = "8" ]
 	then
 		clear
-	fi
-	
+	fi	
 	;;
-
 
  1)	# Appuyé sur Touche CTRL C
 	echo "Appuyé sur Touche CTRL C."
@@ -655,10 +649,8 @@ case $valret in
 	if [ "$choix" = "7" ]
 	then
 		clear
-	fi
-	
+	fi	
 	;;
-
 
  1)	# Appuyé sur Touche CTRL C
 	echo "Appuyé sur Touche CTRL C."
@@ -918,7 +910,6 @@ if [ ! -d /var/lib/postgresql ] ; then
 	fi
 
 	rm -f $fichtemp
-
 	
  echo "90" ; sleep 1
  echo "XXX" ; echo "Redemarrage PostgreSQL en cours"; echo "XXX"
@@ -1007,12 +998,10 @@ case $valret in
 	# Installation PHP Version 5.4
 	if [ "$choix" = "2" ]
 	then
-	rm -f $fichtemp
-	installation_php5
+		rm -f $fichtemp
+		installation_php5
 	fi
-	
 	;;
-
 
  1)	# Appuyé sur Touche CTRL C
 	echo "Appuyé sur Touche CTRL C."
@@ -1169,7 +1158,6 @@ fi
 	fi
 
 	/etc/init.d/apache2 restart &> /dev/null
-
 
  echo "100" ; sleep 1
  echo "XXX" ; echo "Terminer"; echo "XXX"
