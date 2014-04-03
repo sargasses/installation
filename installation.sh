@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 28-03-2014
+# Date : 03-04-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -969,29 +969,29 @@ case $valret in
 
 	if [ ! -f /etc/apt/preferences.d/preferences ] ; then
 
-	cat <<- EOF > /etc/apt/preferences.d/preferences
-	Package: php5*
-	Pin: release a=oldstable
-	Pin-Priority: 700
+		cat <<- EOF > /etc/apt/preferences.d/preferences
+		Package: php5*
+		Pin: release a=oldstable
+		Pin-Priority: 700
 
-	Package: libapache2-mod-php5
-	Pin: release a=oldstable
-	Pin-Priority: 700
+		Package: libapache2-mod-php5
+		Pin: release a=oldstable
+		Pin-Priority: 700
 
-	Package: php-pear
-	Pin: release a=oldstable
-	Pin-Priority: 700
+		Package: php-pear
+		Pin: release a=oldstable
+		Pin-Priority: 700
 
-	Package: *
-	Pin: release a=stable
-	Pin-Priority: 600	
-	EOF
+		Package: *
+		Pin: release a=stable
+		Pin-Priority: 600	
+		EOF
 
 	fi
 
-	apt-get update &> /dev/null
-	rm -f $fichtemp
-	installation_php5
+		apt-get update &> /dev/null
+		rm -f $fichtemp
+		installation_php5
 	fi
 
 
