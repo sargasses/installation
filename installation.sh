@@ -2,7 +2,7 @@
 #
 # Copyright 2013-2014 
 # Développé par : Stéphane HACQUARD
-# Date : 03-04-2014
+# Date : 15-05-2014
 # Version 1.0
 # Pour plus de renseignements : stephane.hacquard@sargasses.fr
 
@@ -252,7 +252,7 @@ else
 	choix10="\Z2Installation Fail2ban\Zn" 
 fi
 
-if [ ! -f /usr/bin/ftp ] ; then
+if [ ! -f /usr/bin/ftp-ssl ] ; then
 	choix11="\Z1Installation Client FTP\Zn" 
 else
 	choix11="\Z2Installation Client FTP\Zn" 
@@ -322,7 +322,7 @@ $DIALOG --backtitle "Installation Serveur Linux" \
 	 --clear \
 	 --colors \
 	 --default-item "2" \
-	 --menu "Quel est votre choix" 12 46 5 \
+	 --menu "Quel est votre choix" 9 46 2 \
 	 "1" "Installation Serveur Linux" \
 	 "2" "Quitter" 2> $fichtemp
 
@@ -686,8 +686,8 @@ fi
  echo "XXX" ; echo "Configuration SSH en cours"; echo "XXX"
 
 	if ! grep "UseDNS" /etc/ssh/sshd_config > /dev/null ; then
-	ligne=$(sed -n '/TCPKeepAlive/=' /etc/ssh/sshd_config)
-	sed -i "$ligne"a"\UseDNS no" /etc/ssh/sshd_config
+		ligne=$(sed -n '/TCPKeepAlive/=' /etc/ssh/sshd_config)
+		sed -i "$ligne"a"\UseDNS no" /etc/ssh/sshd_config
 	fi
 
 	/etc/init.d/ssh reload &> /dev/null
@@ -802,12 +802,12 @@ if [ ! -d /var/lib/mysql ] ; then
 	rm -f /tmp/compte_mysql.txt
 
 	if ! grep "skip-name-resolve" /etc/mysql/my.cnf > /dev/null ; then
-	ligne=$(sed -n '/skip-external-locking/=' /etc/mysql/my.cnf)
-	sed -i "$ligne"a"\skip-name-resolve" /etc/mysql/my.cnf
+		ligne=$(sed -n '/skip-external-locking/=' /etc/mysql/my.cnf)
+		sed -i "$ligne"a"\skip-name-resolve" /etc/mysql/my.cnf
 	fi
 
 	if grep "^bind-address" /etc/mysql/my.cnf > /dev/null ; then
-	sed -i "s/bind-address/#bind-address/g" /etc/mysql/my.cnf 
+		sed -i "s/bind-address/#bind-address/g" /etc/mysql/my.cnf 
 	fi
 
  echo "70" ; sleep 1
@@ -901,11 +901,11 @@ if [ ! -d /var/lib/postgresql ] ; then
 	if ! grep "0.0.0.0" /etc/postgresql/$version_postgresql/main/pg_hba.conf > /dev/null ; then
 
 		if grep "Debian GNU/Linux 7" /etc/issue.net > /dev/null ; then
-		ligne=$(sed -n '/# IPv6 local connections:/=' /etc/postgresql/$version_postgresql/main/pg_hba.conf) 
-		sed -i "$ligne"i"\host    all             all             0.0.0.0/0               md5" /etc/postgresql/$version_postgresql/main/pg_hba.conf
+			ligne=$(sed -n '/# IPv6 local connections:/=' /etc/postgresql/$version_postgresql/main/pg_hba.conf) 
+			sed -i "$ligne"i"\host    all             all             0.0.0.0/0               md5" /etc/postgresql/$version_postgresql/main/pg_hba.conf
 		else
-		ligne=$(sed -n '/# IPv6 local connections:/=' /etc/postgresql/$version_postgresql/main/pg_hba.conf) 
-		sed -i "$ligne"i"\host    all         all         0.0.0.0\/0             md5" /etc/postgresql/$version_postgresql/main/pg_hba.conf
+			ligne=$(sed -n '/# IPv6 local connections:/=' /etc/postgresql/$version_postgresql/main/pg_hba.conf) 
+			sed -i "$ligne"i"\host    all         all         0.0.0.0\/0             md5" /etc/postgresql/$version_postgresql/main/pg_hba.conf
 		fi	
 	fi
 
@@ -1191,41 +1191,25 @@ fi
 	if grep "^agentAddress" /etc/snmp/snmpd.conf > /dev/null ; then
 
 		if grep "^agentAddress  udp:127.0.0.1:161" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/agentAddress  udp:127.0.0.1:161/#agentAddress  udp:127.0.0.1:161/g" /etc/snmp/snmpd.conf
+			sed -i "s/agentAddress  udp:127.0.0.1:161/#agentAddress  udp:127.0.0.1:161/g" /etc/snmp/snmpd.conf
 		fi
 
 		if grep "^#agentAddress udp:161" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/#agentAddress udp:161/agentAddress udp:161/g" /etc/snmp/snmpd.conf
+			sed -i "s/#agentAddress udp:161/agentAddress udp:161/g" /etc/snmp/snmpd.conf
 		fi
 
 		if grep "^ rocommunity public  default" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/ rocommunity public  default/#rocommunity public  default/g" /etc/snmp/snmpd.conf
+			sed -i "s/ rocommunity public  default/#rocommunity public  default/g" /etc/snmp/snmpd.conf
 		fi
 
 		if ! grep "^rocommunity public" /etc/snmp/snmpd.conf > /dev/null ; then
-		ligne=$(sed -n '/Full access from the local host/=' /etc/snmp/snmpd.conf)
-		sed -i "$ligne"i"\ \t\t\t\t\t\t\t#  Full access" /etc/snmp/snmpd.conf
-		sed -i "$ligne"a"\rocommunity public" /etc/snmp/snmpd.conf
+			ligne=$(sed -n '/Full access from the local host/=' /etc/snmp/snmpd.conf)
+			sed -i "$ligne"i"\ \t\t\t\t\t\t\t#  Full access" /etc/snmp/snmpd.conf
+			sed -i "$ligne"a"\rocommunity public" /etc/snmp/snmpd.conf
 		fi
 
 		if grep "^defaultMonitors          yes" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/defaultMonitors          yes/defaultMonitors          no/g" /etc/snmp/snmpd.conf
-		fi
-	fi
-
-	if grep "^com2sec" /etc/snmp/snmpd.conf > /dev/null ; then
-
-
-		if grep "^com2sec paranoid  default" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/com2sec paranoid  default/#com2sec paranoid  default/g" /etc/snmp/snmpd.conf
-		fi
-
-		if grep "^#com2sec readonly  default" /etc/snmp/snmpd.conf > /dev/null ; then
-		sed -i "s/#com2sec readonly  default/com2sec readonly  default/g" /etc/snmp/snmpd.conf
-		fi
-
-		if grep "snmpd.pid 127.0.0.1" /etc/default/snmpd > /dev/null ; then
-		sed -i "s/snmpd.pid 127.0.0.1/snmpd.pid/g" /etc/default/snmpd
+			sed -i "s/defaultMonitors          yes/defaultMonitors          no/g" /etc/snmp/snmpd.conf
 		fi
 	fi
 
@@ -1280,14 +1264,14 @@ installation_client_ftp()
 
 (
 
-if [ ! -f /usr/bin/ftp ] ; then
+if [ ! -f /usr/bin/ftp-ssl ] ; then
  echo "20" ; sleep 1
- echo "XXX" ; echo "apt-get -y install ftp"; echo "XXX"
-	apt-get -y install ftp &> /dev/null
+ echo "XXX" ; echo "apt-get -y install ftp-ssl"; echo "XXX"
+	apt-get -y install ftp-ssl &> /dev/null
 fi
 
  echo "60" ; sleep 1
- echo "XXX" ; echo "apt-get -y install ftp"; echo "XXX"
+ echo "XXX" ; echo "apt-get -y install ftp-ssl"; echo "XXX"
 
  echo "100" ; sleep 1
  echo "XXX" ; echo "Terminer"; echo "XXX"
@@ -1357,15 +1341,15 @@ if [ ! -f /usr/bin/smbclient ] ; then
  echo "XXX" ; echo "Installation SmbClient en cours"; echo "XXX"
 
 	if grep -w "smbclient" $fichtemp > /dev/null ; then
-	apt-get -y install smbclient &> /dev/null
+		apt-get -y install smbclient &> /dev/null
 	fi
 
 	if grep -w "smbfs" $fichtemp > /dev/null ; then
-	apt-get -y install smbfs &> /dev/null
+		apt-get -y install smbfs &> /dev/null
 	fi
 
 	if grep -w "cifs-utils" $fichtemp > /dev/null ; then
-	apt-get -y install cifs-utils &> /dev/null
+		apt-get -y install cifs-utils &> /dev/null
 	fi
 
 rm -f $fichtemp
@@ -1457,7 +1441,7 @@ if [ ! -f /etc/rsyncd.conf ] ; then
  echo "XXX" ; echo "Configuration Rsync en cours"; echo "XXX"
 	
 	if grep "^RSYNC_ENABLE=false" /etc/default/rsync > /dev/null ; then
-	sed -i "s/RSYNC_ENABLE=false/RSYNC_ENABLE=true/g" /etc/default/rsync
+		sed -i "s/RSYNC_ENABLE=false/RSYNC_ENABLE=true/g" /etc/default/rsync
 	fi
 
 	cat <<- EOF > /etc/rsyncd.conf
@@ -1530,14 +1514,15 @@ if [ -f /etc/apt/apt.conf ] ; then
  echo "XXX" ; echo "Recherche d'un Proxy"; echo "XXX"
 
 	if grep "http::Proxy" /etc/apt/apt.conf > /dev/null ; then
-	fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
-	sed -n 's/.*Proxy\ \(.*\);.*/\1/ip' /etc/apt/apt.conf > $fichtemp
-	proxy=$(sed 's/^["\t]*//;s/["\t]*$//' $fichtemp)
+		fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
-	pear config-set http_proxy "$proxy"
+		sed -n 's/.*Proxy\ \(.*\);.*/\1/ip' /etc/apt/apt.conf > $fichtemp
+		proxy=$(sed 's/^["\t]*//;s/["\t]*$//' $fichtemp)
 
-	rm -f $fichtemp
+		pear config-set http_proxy "$proxy"
+
+		rm -f $fichtemp
 	fi
 fi
 
@@ -1699,24 +1684,25 @@ if [ -f /etc/apt/apt.conf ] ; then
  echo "XXX" ; echo "Recherche d'un Proxy"; echo "XXX"
 
 	if grep "http::Proxy" /etc/apt/apt.conf > /dev/null ; then
-	fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
-	sed -n 's/.*Proxy\ \(.*\);.*/\1/ip' /etc/apt/apt.conf > $fichtemp
+		fichtemp=`tempfile 2>/dev/null` || fichtemp=/tmp/test$$
 
-	adresse_ip=$(sed -n 's/.*@\(.*\)\/.*/\1/ip' $fichtemp)
+		sed -n 's/.*Proxy\ \(.*\);.*/\1/ip' /etc/apt/apt.conf > $fichtemp
+
+		adresse_ip=$(sed -n 's/.*@\(.*\)\/.*/\1/ip' $fichtemp)
 	
 
-	sed -n 's/.*http:\/\/\(.*\):.*/\1/ip' /etc/apt/apt.conf  > $fichtemp
+		sed -n 's/.*http:\/\/\(.*\):.*/\1/ip' /etc/apt/apt.conf  > $fichtemp
 
-	user_proxy=$(sed -n 's/^\(.*\):.*/\1/ip' $fichtemp)
-	password_proxy=$(sed -n 's/.*:\(.*\)@.*/\1/ip' $fichtemp)
+		user_proxy=$(sed -n 's/^\(.*\):.*/\1/ip' $fichtemp)
+		password_proxy=$(sed -n 's/.*:\(.*\)@.*/\1/ip' $fichtemp)
 
-	sed -i "s/'http_proxy' => q\[\],/'http_proxy' => q\[http:\/\/$adresse_ip\/\],/g" /etc/perl/CPAN/Config.pm
-	sed -i "s/'proxy_pass' => q\[\],/'proxy_pass' => q\[$password_proxy\],/g" /etc/perl/CPAN/Config.pm
-	sed -i "s/'proxy_user' => q\[\],/'proxy_user' => q\[$user_proxy\],/g" /etc/perl/CPAN/Config.pm
+		sed -i "s/'http_proxy' => q\[\],/'http_proxy' => q\[http:\/\/$adresse_ip\/\],/g" /etc/perl/CPAN/Config.pm
+		sed -i "s/'proxy_pass' => q\[\],/'proxy_pass' => q\[$password_proxy\],/g" /etc/perl/CPAN/Config.pm
+		sed -i "s/'proxy_user' => q\[\],/'proxy_user' => q\[$user_proxy\],/g" /etc/perl/CPAN/Config.pm
 
 
-	rm -f $fichtemp
+		rm -f $fichtemp
 	fi
 fi
 
